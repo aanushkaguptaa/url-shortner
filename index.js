@@ -1,20 +1,34 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-dotenv.config();
+const express = require("express");
+const { connectToMongoDB } = require("./connect");
+const urlRoute = require("./routes/url");
+const URL = require("./models/url");
 
 const app = express();
-app.use(bodyParser.json());
+const PORT = 8001;
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+connectToMongoDB("mongodb://localhost:27017/short-url").then(() =>
+  console.log("Mongodb connected")
+);
 
-const urlRoutes = require('./routes/url');
-app.use('/', urlRoutes);
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use("/url", urlRoute);
+
+app.get("/:shortId", async (req, res) => {
+  const shortId = req.params.shortId;
+  const entry = await URL.findOneAndUpdate(
+    {
+      shortId,
+    },
+    {
+      $push: {
+        visitHistory: {
+          timestamp: Date.now(),
+        },
+      },
+    }
+  );
+  res.redirect(entry.redirectURL);
+});
+
+app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
