@@ -1,0 +1,17 @@
+{
+  "name": "project04---url-shortner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon start"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^6.8.4",
+    "nanoid": "^5.0.7",
+    "nodemon": "^3.1.4"
+  }
+}
