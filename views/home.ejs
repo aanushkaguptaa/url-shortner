@@ -4,12 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        td {
+            background-color: #fff;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>This is a URL shortener made with my sweat and tears.</h1>
+    <h1>URL Shortener</h1>
     <% if(locals.id) { %>
-        <h3>URL Generated: http://localhost:8001/url/<%= id %></h3>
+        <h3>URL Generated: http://localhost:8001/<%= id %></h3>
     <% } %>
     <div>
         <form method="POST" action="/url">
